@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECON0004: Applied Economics Exam</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true
+          },
+          svg: {
+            fontCache: 'global'
+          }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+    <style>
+        :root {
+            --primary-color: #2563eb; /* Main Blue */
+            --secondary-color: #1e40af; /* Darker Blue */
+            --accent-color: #3b82f6; /* Lighter Blue */
+            --light-bg: #f1f5f9; /* Light Gray Background */
+            --dark-text: #1e293b; /* Dark Slate Text */
+            --light-text: #f8fafc; /* Light Text (for dark backgrounds) */
+            --highlight-bg: #fef08a; /* Yellow for search highlight */
+            --highlight-text: #713f12; /* Dark brown text for highlight */
+            --border-radius: 10px;
+            --box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.7;
+            color: var(--dark-text);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
+            padding-top: 120px; /* Initial padding */
+            background-color: var(--light-bg);
+            transition: padding-top 0.3s ease;
+        }
+
+        .container {
+            padding: 20px;
+            margin: 20px;
+        }
+
+        h1, h2, h3 { color: var(--secondary-color); font-weight: 700; margin-bottom: 1rem; }
+        h1 { text-align: center; font-size: 2.5rem; margin: 1.5rem 0 2.5rem 0; padding-bottom: 1rem; border-bottom: 3px solid var(--accent-color); }
+        h2 { font-size: 1.8rem; margin-top: 2.5rem; padding-left: 1rem; border-left: 5px solid var(--primary-color); }
+        h3 { font-size: 1.4rem; color: var(--primary-color); margin-top: 2rem; }
+        h4 { font-size: 1.1rem; color: var(--secondary-color); margin-top: 1.5rem; font-weight: 600; }
+        h5 { /* Style for question text within summary */
+            font-size: 1rem;
+            color: var(--dark-text);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            display: inline; /* Keep it inline with the toggle marker */
+        }
+        em { font-style: italic; color: var(--secondary-color); }
+
+        .nav-container { position: fixed; top: 0; left: 0; right: 0; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); margin: 0 auto; max-width: 1200px; z-index: 100; box-shadow: var(--box-shadow); border-radius: 0 0 var(--border-radius) var(--border-radius); padding: 10px 15px; transition: height 0.3s ease; }
+        .nav-top-row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.2); margin-bottom: 10px; }
+        .nav { display: flex; flex-wrap: wrap; justify-content: center; flex-grow: 1; }
+        .nav a { color: white; text-decoration: none; margin: 5px 8px; padding: 8px 15px; border-radius: 50px; font-weight: 500; transition: all 0.3s ease; background-color: rgba(255,255,255,0.1); font-size: 0.9rem; }
+        .nav a:hover, .nav a.active { background-color: rgba(255,255,255,0.25); transform: translateY(-2px); box-shadow: 0 3px 8px rgba(0,0,0,0.15); }
+
+        #toggle-search-btn { background-color: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 50px; padding: 8px 15px; margin-left: 15px; cursor: pointer; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; white-space: nowrap; }
+        #toggle-search-btn:hover { background-color: rgba(255,255,255,0.3); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+        #search-wrapper { overflow: hidden; transition: max-height 0.4s ease-out; max-height: 0; }
+        #search-wrapper.visible { max-height: 100px; }
+        .search-container { display: flex; justify-content: center; align-items: center; padding-top: 5px; padding-bottom: 5px; }
+        #search-input { padding: 8px 15px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.3); background-color: rgba(255,255,255,0.9); color: var(--dark-text); width: 60%; max-width: 400px; font-size: 0.95rem; transition: box-shadow 0.3s; }
+        #search-input:focus { outline: none; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4); border-color: var(--accent-color); }
+        #search-input::placeholder { color: #9ca3af; opacity: 1; }
+
+        .search-controls { display: flex; align-items: center; margin-left: 10px; }
+        .search-counter { background-color: rgba(255,255,255,0.9); color: var(--dark-text); padding: 4px 8px; border-radius: 12px; font-size: 0.85rem; margin: 0 8px; min-width: 40px; text-align: center; }
+        .search-nav-btn { background-color: rgba(255,255,255,0.9); color: var(--dark-text); border: none; border-radius: 50%; width: 30px; height: 30px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: all 0.2s; font-size: 1.2rem; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+        .search-nav-btn:hover { background-color: var(--primary-color); color: white; }
+        .search-nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .search-nav-btn:active { transform: scale(0.95); }
+
+        mark.highlight.current { background-color: #fbbf24; box-shadow: 0 0 4px rgba(251, 191, 36, 0.6); }
+
+        .section { padding: 25px 30px; margin-bottom: 30px; background-color: white; border-radius: var(--border-radius); box-shadow: var(--box-shadow); transition: transform 0.2s, box-shadow 0.2s; }
+        .section:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.12); }
+
+        .question-block { /* Replaces topic-block for main question container */
+            background-color: #ffffff; /* White background for main question */
+            border: 1px solid #e2e8f0;
+            padding: 20px 25px;
+            margin: 25px 0;
+            border-radius: var(--border-radius);
+        }
+         .question-block .context { /* Style for context block */
+             background-color: #f8fafc;
+             padding: 15px;
+             border-radius: 8px;
+             margin-bottom: 20px;
+             border-left: 4px solid var(--accent-color);
+         }
+         .question-block .context p { margin-bottom: 0.8rem; }
+         .question-block .context strong { color: var(--secondary-color); font-weight: 600; }
+
+
+        code { background-color: #e9ecef; padding: 3px 6px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-size: 0.95em; color: #c7254e; }
+        p code, li code { display: inline; }
+
+        /* Styling for details/summary toggle */
+        details {
+            background-color: #f8fafc; /* Light background for toggle area */
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin: 15px 0;
+            padding: 0; /* Remove padding from details element */
+        }
+        summary {
+            padding: 10px 15px;
+            cursor: pointer;
+            font-weight: 600; /* Make question text bold */
+            color: var(--secondary-color);
+            list-style: none; /* Remove default marker */
+            display: flex; /* Use flexbox for alignment */
+            align-items: center; /* Align items vertically */
+        }
+        summary::-webkit-details-marker { display: none; } /* Hide default marker for Chrome/Safari */
+        summary::marker { display: none; } /* Hide default marker for Firefox */
+
+        summary::before { /* Custom marker */
+            content: '▶'; /* Collapsed state */
+            margin-right: 8px;
+            font-size: 0.8em;
+            transition: transform 0.2s ease-in-out;
+        }
+        details[open] > summary::before {
+            transform: rotate(90deg); /* Expanded state */
+        }
+        .details-content { /* Container for the answer */
+             padding: 10px 15px 15px 35px; /* Indent content slightly */
+             border-top: 1px solid #e2e8f0; /* Separator line */
+        }
+        .details-content p, .details-content ul { margin-bottom: 0.8rem; }
+        .details-content ul { padding-left: 25px; list-style: disc; }
+        .details-content li { margin-bottom: 0.5rem; }
+        .details-content strong { color: var(--secondary-color); font-weight: 600; }
+
+
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; overflow: hidden; border-radius: var(--border-radius); box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; font-size: 0.95em; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #e2e8f0; border-left: 1px solid #e2e8f0; vertical-align: top; }
+        th:first-child, td:first-child { border-left: none; }
+        th { background-color: var(--primary-color); color: white; font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px; border-top: none; }
+        tr:last-child td { border-bottom: none; }
+        tr:nth-child(even) { background-color: #f8fafc; }
+        tr:hover { background-color: #edf2f7; }
+        td br { display: block; margin-bottom: 0.5em; }
+        td ul { margin: 0; padding-left: 20px; list-style: none; }
+        td ul li { margin-bottom: 5px; }
+        td ul li::before { content: "- "; color: var(--primary-color); font-weight: bold; }
+
+        /* Markdown table specific styles */
+        table.markdown-table th, table.markdown-table td {
+            padding: 10px 13px; /* Slightly tighter padding for markdown tables */
+        }
+        table.markdown-table th:nth-child(1), table.markdown-table td:nth-child(1) { text-align: left; }
+        table.markdown-table th:nth-child(n+2), table.markdown-table td:nth-child(n+2) { text-align: center; } /* Center align from 2nd column */
+        table.markdown-table td:nth-child(n+2) { font-family: 'Courier New', Courier, monospace; font-size: 0.9em;} /* Monospace for numerical data */
+
+        .mark-distribution-container { display: flex; justify-content: space-around; margin: 30px 0; flex-wrap: wrap; gap: 15px; }
+        .mark-box { background: white; padding: 20px 25px; border-radius: var(--border-radius); box-shadow: var(--box-shadow); width: 180px; text-align: center; border-top: 5px solid var(--primary-color); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .mark-box:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+        .mark-value { font-size: 2.2rem; color: var(--primary-color); font-weight: 700; }
+        .mark-label { color: var(--dark-text); margin-top: 8px; font-size: 0.95rem; }
+
+        .visualization { margin: 40px 0; padding: 25px; background-color: white; border-radius: var(--border-radius); box-shadow: var(--box-shadow); border-top: 5px solid var(--accent-color); }
+        .visualization h3 { margin-top: 0; margin-bottom: 25px; text-align: center; color: var(--secondary-color); border-left: none; padding-left: 0; }
+
+        .chart-container { min-height: 300px; height: auto; position: relative; width: 100%; max-width: 500px; margin: 0 auto; }
+        .bar-chart-container { max-width: 700px; min-height: 350px; height: auto; }
+        canvas { display: block; max-height: 350px; width: 100% !important; height: auto !important; }
+
+        mark.highlight { background-color: var(--highlight-bg); color: var(--highlight-text); border-radius: 3px; padding: 1px 3px; box-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+
+        hr.section-divider { border: none; border-top: 1px solid #e2e8f0; margin: 40px 0; }
+
+        mjx-container[display="true"] { margin: 1em 0; }
+
+        @media (max-width: 768px) {
+            body { padding-top: 180px; }
+            .nav-top-row { flex-direction: column; align-items: stretch; }
+            .nav { justify-content: center; padding-bottom: 10px; }
+            #toggle-search-btn { margin-left: 0; margin-top: 10px; text-align: center; width: 100%; }
+            .nav a { font-size: 0.9rem; }
+            #search-input { width: 90%; font-size: 0.9rem; padding: 6px 12px; }
+            .container { margin: 10px; padding: 10px; }
+            h1 { font-size: 2rem; } h2 { font-size: 1.5rem; padding-left: 0.5rem; } h3 { font-size: 1.2rem; }
+            .section { padding: 20px 15px; }
+            /* Responsive table styles */
+            table:not(.force-layout), thead:not(.force-layout), tbody:not(.force-layout), th:not(.force-layout), td:not(.force-layout), tr:not(.force-layout) { display: block; }
+            thead tr:not(.force-layout) { position: absolute; top: -9999px; left: -9999px; }
+            tr:not(.force-layout) { border: 1px solid #ccc; margin-bottom: 10px; border-radius: var(--border-radius); overflow: hidden;}
+            td:not(.force-layout) { border: none; border-bottom: 1px solid #eee; position: relative; padding-left: 50% !important; /* Override inline styles */ text-align: right; min-height: 40px; }
+            td:not(.force-layout):before { position: absolute; left: 10px; width: 45%; padding-right: 10px; white-space: nowrap; content: attr(data-label); font-weight: bold; text-align: left; color: var(--primary-color); }
+            td:not(.force-layout):last-child { border-bottom: none;}
+            .mark-box { width: calc(50% - 20px); }
+            .search-container { flex-direction: column; align-items: center; }
+            .search-controls { margin-left: 0; margin-top: 8px; }
+             /* Ensure markdown tables behave correctly in responsive mode */
+             table.markdown-table { display: table; }
+             table.markdown-table thead { display: table-header-group; }
+             table.markdown-table tbody { display: table-row-group; }
+             table.markdown-table tr { display: table-row; border: none; margin-bottom: 0;}
+             table.markdown-table th, table.markdown-table td { display: table-cell; padding-left: 15px !important; text-align: inherit !important; min-height: auto; border-bottom: 1px solid #eee; }
+             table.markdown-table td:before { display: none; } /* Hide data-label for markdown tables */
+             table.markdown-table tr:last-child td { border-bottom: none; }
+        }
+        @media (max-width: 480px) {
+            body { padding-top: 200px; }
+            .mark-box { width: 100%; }
+            td:not(.force-layout) { padding-left: 10px !important; text-align: left; }
+            td:not(.force-layout):before { position: static; display: block; width: 100%; font-weight: bold; margin-bottom: 5px; text-align: left;}
+             /* Adjust markdown table text size on small screens */
+             table.markdown-table { font-size: 0.9em; }
+             table.markdown-table th, table.markdown-table td { padding: 8px 10px !important; }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="nav-container">
+         <div class="nav-top-row">
+            <nav class="nav">
+                <a href="#structure">Exam Structure</a>
+                <a href="#distribution">Mark Distribution</a>
+                <a href="#questions">Question Analysis</a>
+                <a href="#breakdown">Knowledge Breakdown</a>
+            </nav>
+            <button id="toggle-search-btn">Search 🔍</button>
+         </div>
+        <div id="search-wrapper">
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Search page content...">
+                <div class="search-controls">
+                    <button id="prev-btn" class="search-nav-btn" disabled>&lt;</button>
+                    <div id="search-counter" class="search-counter">0/0</div>
+                    <button id="next-btn" class="search-nav-btn" disabled>&gt;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="searchable-content">
+        <h1>ECON0004: Applied Economics Exam</h1>
+
+        <section class="section" id="structure">
+            <h2>Exam Structure and General Instructions</h2>
+             <ul>
+                <li><strong>Exam Title:</strong> ECON0004: Applied Economics</li>
+                <li><strong>Time Allowed:</strong> 2 Hours</li>
+                <li><strong>Sections:</strong> The exam consists of two parts: Part A and Part B.</li>
+                <li><strong>Required Questions:</strong>
+                    <ul>
+                        <li>Answer ALL questions in Part A.</li>
+                        <li>Answer TWO questions from Part B.</li>
+                    </ul>
+                </li>
+                 <li><strong>Mark Allocation:</strong>
+                    <ul>
+                        <li>Part A accounts for 40% of the total mark.</li>
+                        <li>Part B accounts for 60% of the total mark, with each question in Part B carrying 30%.</li>
+                     </ul>
+                 </li>
+                 <li><strong>Answering Policy:</strong> If more questions are answered than required, only the first set of answers up to the required number will be marked.</li>
+             </ul>
+        </section>
+
+        <hr class="section-divider">
+
+        <section class="section" id="distribution">
+            <h2>Mark Distribution Summary</h2>
+
+             <div class="mark-distribution-container">
+                 <div class="mark-box"> <div class="mark-value">40%</div> <div class="mark-label">Part A Marks</div> </div>
+                 <div class="mark-box"> <div class="mark-value">60%</div> <div class="mark-label">Part B Marks</div> </div>
+                 <div class="mark-box"> <div class="mark-value">100%</div> <div class="mark-label">Total Marks</div> </div>
+                 <div class="mark-box"> <div class="mark-value">120</div> <div class="mark-label">Total Minutes</div> </div>
+             </div>
+
+            <div class="visualization">
+                <h3>Mark Distribution by Section</h3>
+                <div class="chart-container">
+                    <canvas id="markDistributionChart"></canvas>
+                </div>
+            </div>
+
+            <div class="visualization">
+                <h3>Topic Weight Distribution (Potential Max Marks per Topic)</h3>
+                 <p style="text-align: center; font-size: 0.9em; color: var(--dark-text); margin-top: -15px; margin-bottom: 20px;"><i>Note: Part B constitutes 60% of the total mark, distributed across only TWO chosen topics from the three available. This chart shows the potential maximum marks allocated to each topic area if it were assessed.</i></p>
+                <div class="chart-container bar-chart-container">
+                    <canvas id="topicDistributionChart"></canvas>
+                </div>
+            </div>
+             <p><strong>Detailed Breakdown for Visualization Data:</strong></p>
+             <ul>
+                 <li><strong>Total Marks:</strong> 100%</li>
+                 <li><strong>Part A:</strong> 40%
+                     <ul><li>Question A1: 40% (Topic: OLS Regression Analysis)</li></ul>
+                 </li>
+                 <li><strong>Part B:</strong> 60% (Choose 2 Questions)
+                     <ul>
+                         <li>Question B1: 30% (Topic: Demand System Analysis)</li>
+                         <li>Question B2: 30% (Topic: Policy Evaluation - Difference-in-Differences)</li>
+                         <li>Question B3: 30% (Topic: Labour Supply Model)</li>
+                     </ul>
+                 </li>
+             </ul>
+             <p><strong>Topic Weights (Maximum Potential Marks):</strong></p>
+             <ul>
+                 <li>OLS Regression Analysis: 40% (from Part A)</li>
+                 <li>Demand System Analysis: 30% (if chosen in Part B)</li>
+                 <li>Difference-in-Differences: 30% (if chosen in Part B)</li>
+                 <li>Labour Supply Model: 30% (if chosen in Part B)</li>
+             </ul>
+
+        </section>
+
+        <hr class="section-divider">
+
+        <section class="section" id="questions">
+             <h2>Detailed Question and Solution Analysis</h2>
+
+             <h3>Part A (40% of Total Mark)</h3>
+
+             <div class="question-block">
+                 <h4>Question A1:</h4>
+                 <div class="context">
+                     <p><strong>Context:</strong> Consider the following model:</p>
+                     $$ln(wage_i) = \beta_0 + \beta_1 education_i + \beta_2 education_i^2 + \beta_3 white_i + \beta_4 gender_i + \beta_5 white_i \times gender_i + \beta_6 couple_i + \mu_i \quad (1)$$
+                     <p>Where $lnwage_i$ is the natural logarithm of the hourly wage of individual i; $education_i$ is years of formal schooling of individual i; $white_i$ is a dummy variable which takes the value 1 if the individual is white and 0 if black; $gender_i$ is a gender dummy variable taking the value 1 if male and 0 if female; $couple_i$ is a dummy variable taking the value 1 if individual i lives as part of a couple (either married or cohabiting); $\mu_i$ is the error term.</p>
+                     <p>Using the data on a representative sample of workers in the UK (Sample size = 10,000), a researcher runs OLS regression and obtains the following estimates ($R^2 = 0.39$):</p>
+                     <table class="markdown-table force-layout">
+                         <thead>
+                             <tr>
+                                 <th>Coefficient</th>
+                                 <th>Point estimate</th>
+                                 <th>Standard error</th>
+                             </tr>
+                         </thead>
+                         <tbody>
+                             <tr> <td>$\beta_0$</td> <td>-0.57</td> <td>0.003</td> </tr>
+                             <tr> <td>$\beta_1$</td> <td>0.006</td> <td>0.002</td> </tr>
+                             <tr> <td>$\beta_2$</td> <td>-0.045</td> <td>0.014</td> </tr>
+                             <tr> <td>$\beta_3$</td> <td>0.056</td> <td>0.028</td> </tr>
+                             <tr> <td>$\beta_4$</td> <td>0.034</td> <td>0.063</td> </tr>
+                             <tr> <td>$\beta_5$</td> <td>0.023</td> <td>0.012</td> </tr>
+                             <tr> <td>$\beta_6$</td> <td>0.072</td> <td>0.0088</td> </tr>
+                         </tbody>
+                     </table>
+                 </div>
+
+                 <details>
+                     <summary><h5>(a) What is the return to an additional year of formal schooling? Can we reject that the returns to education are constant? When is the marginal return to education equal to zero?</h5></summary>
+                     <div class="details-content">
+                         <p><strong>Answer:</strong></p>
+                         <ul>
+                             <li>Return to another year of schooling: $\frac{\partial ln(wage)}{\partial education} = \beta_1 + 2\beta_2 education$.</li>
+                             <li>To test if returns are constant, test $H_0: \beta_2 = 0$ vs $H_1: \beta_2 \neq 0$.</li>
+                             <li>$t = \frac{|\hat{\beta}_2|}{se(\hat{\beta}_2)} = \frac{|-0.045|}{0.014} = 3.21$. Since $3.21 > 1.96$ (critical value for 5% significance), reject $H_0$. Returns are not constant.</li>
+                             <li>Marginal return is zero when $\hat{\beta}_1 + 2\hat{\beta}_2 education = 0 \implies 0.006 - 2(0.045) education = 0 \implies education = \frac{0.006}{0.09} \approx 0.0667$ years. (Note: The solution mentions this value seems small due to a potential typo in the question estimates).</li>
+                         </ul>
+                     </div>
+                 </details>
+
+                 <details>
+                     <summary><h5>(b) What does the $R^2$ measure in the regression? Give the formula and explain what the $R^2$ is in words.</h5></summary>
+                     <div class="details-content">
+                         <p><strong>Answer:</strong></p>
+                         <ul>
+                             <li>$R^2$ measures the proportion of the sample variation in the dependent variable (log wage) that is explained by the independent variables in the model.</li>
+                             <li>Formula: $R^2 = 1 - \frac{RSS}{TSS} = \frac{ESS}{TSS}$, where RSS is Residual Sum of Squares, TSS is Total Sum of Squares, and ESS is Explained Sum of Squares.</li>
+                             <li>In this case, $R^2 = 0.39$, meaning 39% of the variation in log wages in the sample is explained by the model.</li>
+                         </ul>
+                     </div>
+                 </details>
+
+                 <details>
+                     <summary><h5>(c) Holding other variables constant, what is the estimated difference in log hourly wages between white females and non-white females? Is this estimated difference statistically significant?</h5></summary>
+                     <div class="details-content">
+                         <p><strong>Answer:</strong></p>
+                         <ul>
+                             <li>For females, $gender = 0$. The difference is $E[ln(wage)|white=1, female] - E[ln(wage)|white=0, female] = \beta_3$.</li>
+                             <li>The estimated difference is $\hat{\beta}_3 = 0.056$.</li>
+                             <li>Test $H_0: \beta_3 = 0$ vs $H_1: \beta_3 \neq 0$.</li>
+                             <li>$t = \frac{|\hat{\beta}_3|}{se(\hat{\beta}_3)} = \frac{0.056}{0.028} = 2$. Since $2 > 1.96$, reject $H_0$. The difference is statistically significant at the 5% level.</li>
+                         </ul>
+                     </div>
+                 </details>
+
+                 <details>
+                     <summary><h5>(d) Holding other variables constant, what is the estimated difference in log hourly wages between white males and non-white males?</h5></summary>
+                     <div class="details-content">
+                         <p><strong>Answer:</strong></p>
+                         <ul>
+                             <li>For males, $gender = 1$. The difference is $E[ln(wage)|white=1, male] - E[ln(wage)|white=0, male]$.</li>
+                             <li>$E[ln(wage)|white=1, male] = \beta_0 + \beta_1 educ + \beta_2 educ^2 + \beta_3 + \beta_4 + \beta_5 + \beta_6 couple$</li>
+                             <li>$E[ln(wage)|white=0, male] = \beta_0 + \beta_1 educ + \beta_2 educ^2 + \beta_4 + \beta_6 couple$</li>
+                             <li>Difference = $\beta_3 + \beta_5$.</li>
+                             <li>The estimated difference is $\hat{\beta}_3 + \hat{\beta}_5 = 0.056 + 0.023 = 0.079$.</li>
+                         </ul>
+                     </div>
+                 </details>
+
+                 <details>
+                     <summary><h5>(e) Construct a test of the hypothesis that being in a couple raises wages by 10%. Can you reject the hypothesis that being in a couple is associated with 10% higher wages?</h5></summary>
+                     <div class="details-content">
+                         <p><strong>Answer:</strong></p>
+                         <ul>
+                             <li>A 10% increase corresponds to approximately a 0.1 increase in log wages (log-level interpretation). Test $H_0: \beta_6 = 0.1$ vs $H_1: \beta_6 \neq 0.1$.</li>
+                             <li>$t = \frac{\hat{\beta}_6 - 0.1}{se(\hat{\beta}_6)} = \frac{0.072 - 0.1}{0.0088} = \frac{-0.028}{0.0088} \approx -3.18$.</li>
+                             <li>Since $|-3.18| > 1.96$, reject $H_0$. We can reject the hypothesis that being in a couple is associated with 10% higher wages.</li>
+                         </ul>
+                     </div>
+                 </details>
+
+                 <details>
+                     <summary><h5>(f) Do you see any problems with the empirical model in equation (1), as an estimate of the financial returns to education?</h5></summary>
+                     <div class="details-content">
+                         <p><strong>Answer:</strong> (Sketch answer points)</p>
+                         <ul>
+                             <li><strong>Omitted Variable Bias (OVB):</strong> Key variables like 'ability' might be omitted. Ability is likely positively correlated with both education and wages, leading to an upward bias in the estimated return to education. Violation of $E[\epsilon|X]=0$.</li>
+                             <li><strong>Functional Form:</strong> The quadratic form might not be correct; returns might interact with gender or other variables.</li>
+                             <li><strong>Measurement Error:</strong> 'Years of schooling' might be a poor measure of educational attainment compared to specific qualifications.</li>
+                         </ul>
+                     </div>
+                 </details>
+             </div>
+
+             <hr class="section-divider" style="margin: 30px 0;">
+
+             <h3>Part B (Answer TWO Questions - 30% Each)</h3>
+
+             <div class="question-block">
+                 <h4>Question B1: Demand System</h4>
+                 <div class="context">
+                     <p><strong>Context:</strong> A researcher working for a chain of gastro-pubs, estimates the following demand system for food prepared and eaten at home (food at home), and purchases of food prepared outside the home (restaurant and takeaway meals; food out), for a sample of 2500 working-age urban households observed during 2015:</p>
+                      <table class="markdown-table force-layout">
+                          <thead>
+                              <tr>
+                                  <th>Variable</th>
+                                  <th>$w_{fout}$ Coef.</th>
+                                  <th>(t-value)</th>
+                                  <th>$w_{fhome}$ Coef.</th>
+                                  <th>(t-value)</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr> <td>$lnY$</td> <td>0.062</td> <td>(4.22)</td> <td>-0.133</td> <td>(4.67)</td> </tr>
+                              <tr> <td>$lnP_{fout}$</td> <td>-0.042</td> <td>(3.13)</td> <td>0.008</td> <td>(2.44)</td> </tr>
+                              <tr> <td>$lnP_{fhome}$</td> <td>0.012</td> <td>(2.01)</td> <td>0.020</td> <td>(3.21)</td> </tr>
+                              <tr> <td>People</td> <td>0.002</td> <td>(0.46)</td> <td>0.038</td> <td>(4.33)</td> </tr>
+                              <tr> <td>Head FT</td> <td>0.016</td> <td>(2.59)</td> <td>-0.003</td> <td>(2.06)</td> </tr>
+                              <tr> <td>Constant</td> <td>0.019</td> <td>(0.98)</td> <td>0.160</td> <td>(4.22)</td> </tr>
+                              <tr> <td>$R^2$</td> <td>0.26</td> <td></td> <td>0.45</td> <td></td> </tr>
+                              <tr> <td>Mean, dependent variable</td> <td>0.065</td> <td></td> <td>0.196</td> <td></td> </tr>
+                          </tbody>
+                      </table>
+                      <p>Where: $w_{fout}$ is the budget share on food prepared outside the home; $w_{fhome}$ is the budget share on food prepared at home; $lnY$ is the log of household expenditure; $lnP_{fout}$ is the log of the price of food out; $lnP_{fhome}$ is the log of the price of food at home; People is the number of people in the household; Head FT is a dummy variable taking the value 1 if the head of household works a full time, and 0 otherwise; t-values are reported in absolute terms.</p>
+                 </div>
+
+                 <details>
+                     <summary><h5>(a) What is the interpretation of the coefficient on People in each equation? Can we reject the hypothesis that the number of people in the household does not affect spending on food out? Can we reject the same hypothesis for spending on food at home?</h5></summary>
+                     <div class="details-content">
+                         <p><strong>Answer:</strong></p>
+                         <ul>
+                             <li>Coefficient on People: An extra person increases the budget share on food out by 0.002 and food at home by 0.038, holding other factors constant.</li>
+                             <li>Food out: $H_0: \beta_{People} = 0$. The t-value is 0.46. Since $|0.46| < 1.96$, we cannot reject $H_0$. No significant effect on food out share.</li>
+                             <li>Food home: $H_0: \beta_{People} = 0$. The t-value is 4.33. Since $|4.33| > 1.96$, we reject $H_0$. Significant positive effect on food at home share.</li>
+                         </ul>
+                     </div>
+                 </details>
+
+                 <details>
+                     <summary><h5>(b) Consider a household with an average budget share on each good. Can we say about whether food in and food out seem to be luxuries or necessities?</h5></summary>
+                     <div class="details-content">
+                          <p><strong>Answer:</strong></p>
+                          <ul>
+                              <li>Use the formula for income elasticity in a budget share model: $\xi_{w,y} = 1 + \frac{\beta_{lnY}}{w}$. Average shares are $w_{fout} = 0.065$ and $w_{fhome} = 0.196$.</li>
+                              <li>Food out: $\xi_{fout,Y} = 1 + \frac{0.062}{0.065} \approx 1.954$. Since $\xi_{fout,Y} > 1$ (or because $\beta_{lnY} = 0.062 > 0$), food out appears to be a luxury. The coefficient is statistically significant (t=4.22).</li>
+                              <li>Food home: $\xi_{fhome,Y} = 1 + \frac{-0.133}{0.196} \approx 1 - 0.679 = 0.321$. Since $0 < \xi_{fhome,Y} < 1$ (or because $\beta_{lnY} = -0.133 < 0$), food at home appears to be a necessity. The coefficient is statistically significant (t=4.67).</li>
+                          </ul>
+                     </div>
+                 </details>
+
+                 <details>
+                     <summary><h5>(c) Do the reported own price terms suggest the demand for food in and food out are price elastic, or price inelastic? Are the cross price terms consistent with economic theory?</h5></summary>
+                     <div class="details-content">
+                         <p><strong>Answer:</strong></p>
+                         <ul>
+                             <li>Own-price elasticity interpretation in this model depends on the coefficient $\gamma_{jj}$ on $lnP_j$.</li>
+                             <li>Food out: Coefficient on $lnP_{fout}$ is $\gamma_{fout,fout} = -0.042$ (significant, t=3.13). A negative coefficient suggests elastic demand in this context.</li>
+                             <li>Food home: Coefficient on $lnP_{fhome}$ is $\gamma_{fhome,fhome} = 0.020$ (significant, t=3.21). A positive coefficient suggests inelastic demand in this context.</li>
+                             <li>Cross-price terms: Coefficient of $lnP_{fhome}$ in the $w_{fout}$ equation ($\gamma_{fout,fhome}$) is 0.012 (positive, significant). Coefficient of $lnP_{fout}$ in the $w_{fhome}$ equation ($\gamma_{fhome,fout}$) is 0.008 (positive, significant). Positive cross-price coefficients suggest the goods are substitutes, which is consistent with economic theory.</li>
+                         </ul>
+                     </div>
+                 </details>
+
+                 <details>
+                     <summary><h5>(d) What are the advantages of using a budget-share model such as this in contrast to a double-log specification for spending on each good? Do you think these are relevant in the context of spending on food?</h5></summary>
+                     <div class="details-content">
+                         <p><strong>Answer:</strong></p>
+                         <ul>
+                             <li>Advantages: Budget share models can handle zero expenditures (double-log requires positive values); they allow for non-constant elasticities (double-log implies constant elasticity $\beta_1$).</li>
+                             <li>Relevance: Zero expenditures might occur for 'food out', making the budget share model suitable. Elasticities for food items are unlikely to be constant across all income/price levels.</li>
+                         </ul>
+                     </div>
+                 </details>
+
+                 <details>
+                     <summary><h5>(e) In a separate estimation model based only on rural households, the researcher finds that the coefficient on lnY in the food out equation is 0.028. Can we reject the hypothesis that the equivalent parameter reported in the table has the value 0.028? Do you think it is plausible that the effect of total budget (lnY) or of prices on demand for food out, might be different for rural and urban households? Explain your answer.</h5></summary>
+                     <div class="details-content">
+                         <p><strong>Answer:</strong></p>
+                          <ul>
+                              <li>Test $H_0: \beta_{lnY, fout} = 0.028$ vs $H_1: \beta_{lnY, fout} \neq 0.028$. The original estimate is $\hat{\beta}_{lnY, fout} = 0.062$ with t=4.22.</li>
+                              <li>First, find the standard error: $se(\hat{\beta}_{lnY, fout}) = \frac{|\hat{\beta}_{lnY, fout}|}{|t|} = \frac{0.062}{4.22} \approx 0.0147$.</li>
+                              <li>$t = \frac{\hat{\beta}_{lnY, fout} - 0.028}{se(\hat{\beta}_{lnY, fout})} = \frac{0.062 - 0.028}{0.0147} = \frac{0.034}{0.0147} \approx 2.31$. Since $|2.31| > 1.96$, reject $H_0$. The coefficient is significantly different from 0.028.</li>
+                              <li>Plausibility: Yes, it's plausible. Rural and urban households might differ in availability of restaurants ('food out'), income levels, lifestyles, and prices, leading to different demand responses.</li>
+                          </ul>
+                     </div>
+                 </details>
+             </div>
+
+             <div class="question-block">
+                 <h4>Question B2: Difference-in-Differences</h4>
+                  <div class="context">
+                     <p><strong>Context:</strong> Suppose in 2014 the government introduces a new policy targeted at decreasing unemployment amongst disadvantaged groups in designated areas of high unemployment. One part of this policy is an employment rehabilitation policy that provides a subsidy to employers for every worker they employ with a criminal record. Data are collected on the unemployment rates of a group of workers without criminal records (group A) and a group of workers with criminal records (group B) before and after the policy is introduced.</p>
+                      <table class="markdown-table force-layout">
+                          <thead>
+                              <tr>
+                                  <th></th>
+                                  <th>2013 (before)</th>
+                                  <th>2015 (after)</th>
+                              </tr>
+                          </thead>
+                           <tbody>
+                               <tr> <td>Group A: No criminal records</td> <td>23.25%</td> <td>20.37%</td> </tr>
+                               <tr> <td>Group B: criminal records</td> <td>49.46%</td> <td>42.86%</td> </tr>
+                           </tbody>
+                      </table>
+                 </div>
+
+                 <details>
+                     <summary><h5>(a) Using the table above, compare the unemployment rate of each group in 2013. Do the data reflect a causal effect of having a criminal record on the unemployment rate?</h5></summary>
+                     <div class="details-content">
+                         <p><strong>Answer:</strong></p>
+                         <ul>
+                             <li>Comparison 2013: Group B (criminal record) unemployment = 49.46%, Group A (no record) = 23.25%. Difference = 49.46% - 23.25% = 26.21%.</li>
+                             <li>Causality: Unlikely to be purely causal. Potential issues include: omitted variables (e.g., education, ability correlated with both criminal records and unemployment), reverse causality (unemployment might lead to crime), selection bias. Correlation does not imply causation.</li>
+                         </ul>
+                     </div>
+                 </details>
+
+                 <details>
+                     <summary><h5>(b) Using the data in the table above, calculate an estimate of the effect of the policy on the unemployment rate. Be clear about how you would calculate it. Illustrate the difference-in-differences estimator of the effect of the policy graphically.</h5></summary>
+                     <div class="details-content">
+                         <p><strong>Answer:</strong></p>
+                         <ul>
+                             <li>DiD Calculation: $(\overline{y}_{Treat,After} - \overline{y}_{Treat,Before}) - (\overline{y}_{Control,After} - \overline{y}_{Control,Before})$.</li>
+                             <li>Change for Treatment (Group B): $42.86\% - 49.46\% = -6.60\%$.</li>
+                             <li>Change for Control (Group A): $20.37\% - 23.25\% = -2.88\%$.</li>
+                             <li>DiD Estimate = $(-6.60\%) - (-2.88\%) = -3.72\%$.</li>
+                             <li>Interpretation: The policy is estimated to have reduced the unemployment rate for those with criminal records by 3.72 percentage points, relative to the change experienced by those without criminal records.</li>
+                             <li>Graphical Illustration: A graph showing two lines (one for Group A, one for Group B) plotting unemployment rates in 2013 and 2015. The DiD estimate is the vertical difference between the actual 2015 point for Group B and the point where Group B's line would have ended if it followed the same trend as Group A's line (parallel trend assumption). (Note: Graph not rendered here, but described).</li>
+                         </ul>
+                     </div>
+                 </details>
+
+                 <details>
+                     <summary><h5>(c) Carefully explain the assumptions required for the difference-in-differences estimator to be valid. Are these reasonable in this case?</h5></summary>
+                     <div class="details-content">
+                         <p><strong>Answer:</strong></p>
+                         <ul>
+                             <li><strong>Key Assumption: Parallel Trends.</strong> In the absence of the treatment (policy), the average change in the outcome variable (unemployment rate) would have been the same for both the treatment and control groups.</li>
+                             <li><strong>Other related assumptions:</strong> No spillover/general equilibrium effects, stable group composition/no selection effects related to treatment.</li>
+                             <li>Reasonableness:
+                                 <ul>
+                                     <li>Parallel Trends/No GE Effects: Questionable. Hiring subsidized workers (Group B) might displace non-subsidized workers (potentially affecting Group A if they compete for similar jobs). Also, the groups might work in different sectors experiencing different economic trends.</li>
+                                     <li>Composition Effects: Probably less problematic.</li>
+                                 </ul>
+                             </li>
+                         </ul>
+                     </div>
+                 </details>
+
+                 <details>
+                     <summary><h5>(d) In order to evaluate this policy, you run the following regression: $Unemployment_i = \beta_0 + \beta_1 After_i + \beta_2 Treat_i + \beta_3 (After_i \times Treat_i) + \epsilon_i$. Which regression coefficient will measure the difference-in-differences estimate of the policy? Show the derivation and explain your answer.</h5></summary>
+                     <div class="details-content">
+                         <p><strong>Context Note:</strong> Variable definitions provided: $Unemployment_i$ is a dummy variable equal to 1 if the observation i is unemployed and 0 otherwise; $After_i$ is a dummy variable that takes the value 1 if the observation i is in year 2015 (after the policy is introduced) and 0 otherwise; $Treat_i$ is a dummy variable that takes the value 1 if the observation i is from treatment group and 0 otherwise; $After_i \times Treat_i$ is the interaction between the two variables; $\epsilon_i$ is the error term.</p>
+                         <p><strong>Answer:</strong></p>
+                          <ul>
+                              <li>The coefficient $\beta_3$ measures the DiD estimate.</li>
+                              <li>Derivation:
+                                  <ul>
+                                      <li>$E[Unemp | After=0, Treat=0] = \beta_0$</li>
+                                      <li>$E[Unemp | After=1, Treat=0] = \beta_0 + \beta_1$</li>
+                                      <li>$E[Unemp | After=0, Treat=1] = \beta_0 + \beta_2$</li>
+                                      <li>$E[Unemp | After=1, Treat=1] = \beta_0 + \beta_1 + \beta_2 + \beta_3$</li>
+                                  </ul>
+                              </li>
+                              <li>Calculate DiD:
+                                  <ul>
+                                      <li>Change in Treatment: $E[After=1, Treat=1] - E[After=0, Treat=1] = (\beta_0 + \beta_1 + \beta_2 + \beta_3) - (\beta_0 + \beta_2) = \beta_1 + \beta_3$</li>
+                                      <li>Change in Control: $E[After=1, Treat=0] - E[After=0, Treat=0] = (\beta_0 + \beta_1) - \beta_0 = \beta_1$</li>
+                                      <li>DiD = (Change in Treatment) - (Change in Control) = $(\beta_1 + \beta_3) - \beta_1 = \beta_3$.</li>
+                                  </ul>
+                              </li>
+                          </ul>
+                     </div>
+                 </details>
+
+                 <details>
+                     <summary><h5>(e) What are the advantages of implementing the difference-in-differences estimator using a regression, rather than the simpler method described in part (b)?</h5></summary>
+                     <div class="details-content">
+                         <p><strong>Answer:</strong></p>
+                         <ul>
+                             <li>Provides standard errors for the DiD estimate ($\hat{\beta}_3$), allowing for formal hypothesis testing on the policy effect's significance.</li>
+                             <li>Allows inclusion of additional control variables (covariates) to potentially improve the precision of the estimate and control for compositional differences between groups.</li>
+                         </ul>
+                     </div>
+                 </details>
+             </div>
+
+             <div class="question-block">
+                 <h4>Question B3: Labour Supply</h4>
+                 <div class="context">
+                      <p><strong>Context:</strong> Consider the following equation, which shows estimates from a model of the labour supply of 4000 married men in semi-skilled occupations in London and the South West.</p>
+                      $$Hours = \underset{(6.12)}{28.98} - \underset{(0.07)}{0.14} Y + \underset{(0.24)}{9.6} W - \underset{(0.06)}{0.12} W^2 - \underset{(6.54)}{7.82} K + \underset{(2.35)}{5.28} Health$$
+                      <p>where numbers in brackets are standard errors and the following table gives details of the regression variables:</p>
+                       <table class="markdown-table force-layout">
+                           <thead>
+                               <tr>
+                                   <th>Variable Name</th>
+                                   <th>Description</th>
+                               </tr>
+                           </thead>
+                           <tbody>
+                               <tr> <td>Hours</td> <td>Hours worked per week</td> </tr>
+                               <tr> <td>Y</td> <td>Wife's income (pounds per week)</td> </tr>
+                               <tr> <td>W</td> <td>Wage (pounds per hour)</td> </tr>
+                               <tr> <td>K</td> <td>Dummy variable = 1 if he has children, 0 otherwise</td> </tr>
+                               <tr> <td>Health</td> <td>Dummy variable = 1 if he is healthy, 0 otherwise</td> </tr>
+                           </tbody>
+                       </table>
+                 </div>
+
+                 <details>
+                     <summary><h5>(a) According to economic theory, what happens to hours of work when wage increases? Draw graphs to illustrate your answer.</h5></summary>
+                     <div class="details-content">
+                         <p><strong>Answer:</strong></p>
+                         <ul>
+                             <li>A wage increase has two opposing effects:
+                                 <ul>
+                                     <li><strong>Substitution Effect:</strong> Higher wage increases the opportunity cost of leisure, encouraging more work.</li>
+                                     <li><strong>Income Effect:</strong> Higher wage increases purchasing power. If leisure is a normal good, this encourages more leisure (less work).</li>
+                                 </ul>
+                             </li>
+                             <li>The net effect depends on which effect dominates. The labour supply curve can be upward sloping (substitution > income) or backward bending (income > substitution at higher wage levels).</li>
+                             <li>Graphs typically show indifference curves between consumption and leisure, budget constraints shifting with wage changes, and the resulting labour supply curve. (Note: Graph not rendered here, but described).</li>
+                         </ul>
+                     </div>
+                 </details>
+
+                 <details>
+                     <summary><h5>(b) Is there evidence of backward bending labour supply in this model? If so, at what point does it occur?</h5></summary>
+                     <div class="details-content">
+                         <p><strong>Answer:</strong></p>
+                         <ul>
+                             <li>Yes, there is evidence. The coefficient on $W$ is positive (9.6) and significant ($t = 9.6/0.24 = 40 > 1.64$). The coefficient on $W^2$ is negative (-0.12) and significant ($t = -0.12/0.06 = -2 < -1.64$). This quadratic form indicates a curve that increases and then decreases.</li>
+                             <li>The turning point occurs where the marginal effect of wage on hours is zero: $\frac{\partial Hours}{\partial W} = 9.6 - 2(0.12)W = 0$.</li>
+                             <li>$9.6 = 0.24W \implies W = \frac{9.6}{0.24} = 40$. The labour supply curve bends backward at a wage of £40 per hour.</li>
+                         </ul>
+                     </div>
+                 </details>
+
+                 <details>
+                     <summary><h5>(c) Holding other variables constant, what is the estimated difference in weekly working hours between men with children and men without children? Is this estimated difference statistically significant?</h5></summary>
+                     <div class="details-content">
+                          <p><strong>Answer:</strong></p>
+                          <ul>
+                              <li>The difference is given by the coefficient on $K$ (Dummy = 1 if children), which is -7.82 hours per week. Men with children are estimated to work 7.82 hours less per week, ceteris paribus.</li>
+                              <li>Test $H_0: \beta_K = 0$ vs $H_1: \beta_K \neq 0$.</li>
+                              <li>$t = \frac{\hat{\beta}_K}{se(\hat{\beta}_K)} = \frac{-7.82}{6.54} \approx -1.196$. Since $|-1.196| < 1.96$, we cannot reject $H_0$ at the 5% level. The estimated difference is not statistically significant.</li>
+                          </ul>
+                     </div>
+                 </details>
+
+                 <details>
+                     <summary><h5>(d) Show that the elasticity of labour supply with respect to the wage depends on health status in this empirical model.</h5></summary>
+                     <div class="details-content">
+                          <p><strong>Answer:</strong></p>
+                          <ul>
+                              <li>Elasticity formula: $\epsilon_{H,W} = \frac{\partial Hours}{\partial W} \times \frac{W}{Hours}$.</li>
+                              <li>$\frac{\partial Hours}{\partial W} = 9.6 - 0.24W$.</li>
+                              <li>$Hours = 28.98 - 0.14 Y + 9.6 W - 0.12 W^2 - 7.82 K + 5.28 Health$.</li>
+                              <li>Substitute these into the elasticity formula:
+                                  $$\epsilon_{H,W} = (9.6 - 0.24W) \times \frac{W}{28.98 - 0.14 Y + 9.6 W - 0.12 W^2 - 7.82 K + 5.28 Health}$$
+                              </li>
+                              <li>Since the denominator ($Hours$) explicitly includes the $Health$ term, the overall elasticity $\epsilon_{H,W}$ depends on the value of the $Health$ dummy variable.</li>
+                          </ul>
+                     </div>
+                 </details>
+
+                 <details>
+                     <summary><h5>(e) Note that the data for this study is a sample of workers only. What is the problem with using these estimates to make statements about the preferences for work of individuals currently unemployed?</h5></summary>
+                     <div class="details-content">
+                         <p><strong>Answer:</strong></p>
+                         <ul>
+                             <li><strong>Sample Selection Bias:</strong> The sample only includes employed individuals. Unemployed individuals might have systematically different characteristics or preferences for work compared to those employed. Using estimates from a selected sample (workers only) to infer the behaviour of the entire population (including non-workers) can lead to biased conclusions.</li>
+                         </ul>
+                     </div>
+                 </details>
+             </div>
+        </section>
+
+        <hr class="section-divider">
+
+        <section class="section" id="breakdown">
+            <h2>Exam Question Breakdown with Note References</h2>
+             <p>This section integrates information from your `ECON0004 note.pdf` (assumed based on context) with the sample exam structure.</p>
+
+            <h3>Knowledge Breakdown by Question & Lecture</h3>
+             <table class="markdown-table">
+                 <thead>
+                     <tr>
+                         <th>Exam Question</th>
+                         <th>Topic / Task</th>
+                         <th>Key Concepts Required</th>
+                         <th>Relevant Lectures</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                      <tr>
+                         <td data-label="Exam Question"><strong>PART A</strong></td>
+                         <td data-label="Topic / Task"></td>
+                         <td data-label="Key Concepts Required"></td>
+                         <td data-label="Relevant Lectures"></td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">A1 (a)</td>
+                         <td data-label="Topic / Task">Return to schooling (quadratic model)</td>
+                         <td data-label="Key Concepts Required">Multiple regression interpretation, non-linear (quadratic) functional form, marginal effects (calculus: $\frac{\partial y}{\partial x}=\beta_{1}+2\beta_{2}x$), hypothesis testing (t-test: $\beta_2=0,$ $\beta_1+2\beta_2Educ=0)$</td>
+                         <td data-label="Relevant Lectures">Lec 2, 3, 4</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">A1 (b)</td>
+                         <td data-label="Topic / Task">R-squared interpretation & formula</td>
+                         <td data-label="Key Concepts Required">Goodness-of-fit, $R^2$ definition, formula ($ESS/TSS$ or $1-RSS/TSS$), interpretation as explained variance</td>
+                         <td data-label="Relevant Lectures">Lec 3</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">A1 (c)</td>
+                         <td data-label="Topic / Task">Wage difference (White vs Non-white females)</td>
+                         <td data-label="Key Concepts Required">Multiple regression interpretation, dummy variables, hypothesis testing (t-test: $\beta_3=0)$</td>
+                         <td data-label="Relevant Lectures">Lec 3, 4</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">A1 (d)</td>
+                         <td data-label="Topic / Task">Wage difference (White vs Non-white males)</td>
+                         <td data-label="Key Concepts Required">Multiple regression interpretation, dummy variables, interaction terms, calculating combined effects ($\beta_3+\beta_5$)</td>
+                         <td data-label="Relevant Lectures">Lec 4</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">A1 (e)</td>
+                         <td data-label="Topic / Task">Test effect of couple dummy vs specific value</td>
+                         <td data-label="Key Concepts Required">Multiple regression interpretation, dummy variables, hypothesis testing (t-test: $\beta_6=0.1$), log-level interpretation (approx. percentage change: $(100\times\beta_1)\%$)</td>
+                         <td data-label="Relevant Lectures">Lec 3, 4</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">A1 (f)</td>
+                         <td data-label="Topic / Task">Problems with the model (causality)</td>
+                         <td data-label="Key Concepts Required">Causality vs. Correlation, Omitted Variable Bias (OVB) (e.g., ability), potential measurement error, sample selection issues, functional form assumptions</td>
+                         <td data-label="Relevant Lectures">Lec 1, 2, 4, 5</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question"><strong>PART B</strong></td>
+                         <td data-label="Topic / Task"></td>
+                         <td data-label="Key Concepts Required"></td>
+                         <td data-label="Relevant Lectures"></td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">B1 (a)</td>
+                         <td data-label="Topic / Task">Interpret People coefficient (Budget Share)</td>
+                         <td data-label="Key Concepts Required">Consumer demand theory, budget share model interpretation, demographic effects, hypothesis testing (using given t-values)</td>
+                         <td data-label="Relevant Lectures">Lec 3, 6</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">B1 (b)</td>
+                         <td data-label="Topic / Task">Classify goods (Luxury/Necessity - Budget Share)</td>
+                         <td data-label="Key Concepts Required">Budget share model, calculating income elasticity from budget share model ($\xi_{w,y}=1+\beta/w$), interpreting elasticity values (necessity $\xi<1$ vs luxury $\xi>1$)</td>
+                         <td data-label="Relevant Lectures">Lec 6</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">B1 (c)</td>
+                         <td data-label="Topic / Task">Interpret price coefficients (Budget Share)</td>
+                         <td data-label="Key Concepts Required">Budget share model interpretation (price coefficients $\gamma_{jj}$ ≠ elasticities), inferring price elasticity (inelastic if $\gamma_{jj}>0$), cross-price effects ($\gamma_{jk}$: substitutes/complements)</td>
+                         <td data-label="Relevant Lectures">Lec 6</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">B1 (d)</td>
+                         <td data-label="Topic / Task">Advantages Budget Share vs Double Log</td>
+                         <td data-label="Key Concepts Required">Functional form choice, handling zero consumption, constant vs. variable elasticity, relevance to food demand</td>
+                         <td data-label="Relevant Lectures">Lec 4, 6</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">B1 (e)</td>
+                         <td data-label="Topic / Task">Compare Urban vs Rural coefficient</td>
+                         <td data-label="Key Concepts Required">Hypothesis testing (compare coefficient to a specific value), calculating SE from Coef/t-value ($t=\frac{\hat{\beta}_j-\beta_{j,0}}{se(\hat{\beta}_j)}$), plausibility arguments for differences</td>
+                         <td data-label="Relevant Lectures">Lec 3, 6</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">B2 (a)</td>
+                         <td data-label="Topic / Task">Compare baseline unemployment (Causality?)</td>
+                         <td data-label="Key Concepts Required">Correlation vs Causation, potential selection bias/confounding factors</td>
+                         <td data-label="Relevant Lectures">Lec 1, 5</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">B2 (b)</td>
+                         <td data-label="Topic / Task">Calculate & illustrate DiD estimate</td>
+                         <td data-label="Key Concepts Required">Difference-in-Differences (DiD) logic and calculation, graphical representation of DiD</td>
+                         <td data-label="Relevant Lectures">Lec 5, 8</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">B2 (c)</td>
+                         <td data-label="Topic / Task">DiD Assumptions & Reasonableness</td>
+                         <td data-label="Key Concepts Required">Parallel Trends assumption (definition, importance), assessing reasonableness in the given context</td>
+                         <td data-label="Relevant Lectures">Lec 5, 8</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">B2 (d)</td>
+                         <td data-label="Topic / Task">DiD Regression implementation & interpretation</td>
+                         <td data-label="Key Concepts Required">DiD regression setup (dummies, interaction), identifying the DiD coefficient ($\beta_3$), deriving why $\beta_3$ is the DiD estimate</td>
+                         <td data-label="Relevant Lectures">Lec 5, 8</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">B2 (e)</td>
+                         <td data-label="Topic / Task">Advantages of DiD Regression</td>
+                         <td data-label="Key Concepts Required">Obtaining standard errors for inference, ability to include control variables</td>
+                         <td data-label="Relevant Lectures">Lec 5, 8</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">B3 (a)</td>
+                         <td data-label="Topic / Task">Labour Supply Theory (Wage effect)</td>
+                         <td data-label="Key Concepts Required">Income and substitution effects of wage changes on hours worked (Micro theory background)</td>
+                         <td data-label="Relevant Lectures">(Micro Theory)</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">B3 (b)</td>
+                         <td data-label="Topic / Task">Backward bending labour supply (Quadratic model)</td>
+                         <td data-label="Key Concepts Required">Non-linear (quadratic) functional form, calculating marginal effect of wage ($\partial Hours/\partial W$), finding the wage where marginal effect changes sign</td>
+                         <td data-label="Relevant Lectures">Lec 4</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">B3 (c)</td>
+                         <td data-label="Topic / Task">Effect of children (K dummy) & significance</td>
+                         <td data-label="Key Concepts Required">Multiple regression interpretation (dummy variable coefficient), hypothesis testing (t-test $\beta_K=0$ using Coef/SE)</td>
+                         <td data-label="Relevant Lectures">Lec 3, 4</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">B3 (d)</td>
+                         <td data-label="Topic / Task">Elasticity dependence on Health</td>
+                         <td data-label="Key Concepts Required">Labour supply elasticity formula ($\epsilon_{H,W}= (\partial Hours/\partial W) \times (W/Hours)$), understanding how components depend on other variables (Health)</td>
+                         <td data-label="Relevant Lectures">Lec 4 (Marginal Effects)</td>
+                     </tr>
+                     <tr>
+                         <td data-label="Exam Question">B3 (e)</td>
+                         <td data-label="Topic / Task">Sample Selection Bias issue</td>
+                         <td data-label="Key Concepts Required">Understanding limitations of data (workers only), concept of sample selection bias, why estimates might not apply to the unemployed population</td>
+                         <td data-label="Relevant Lectures">Lec 1, 2, 5</td>
+                     </tr>
+                 </tbody>
+             </table>
+
+             <h3>Connection and Summary (Based on Your Notes)</h3>
+             <p>To succeed in this exam, a solid grasp of the following is needed:</p>
+             <ul>
+                 <li><strong>OLS Regression:</strong> Multiple regression principles, assumptions (especially exogeneity $E[\epsilon|X]=0$), estimation, and interpretation.</li>
+                 <li><strong>Functional Forms:</strong> Facility with linear, log-level, level-log, log-log, quadratic forms, budget shares, dummy variables, and interactions, understanding their implications for interpretation (e.g., marginal effects, elasticities).</li>
+                 <li><strong>Hypothesis Testing:</strong> Conducting and interpreting t-tests for significance and specific values, using t-statistics ($t = (\hat{\beta}_j - \beta_{j,0}) / se(\hat{\beta}_j)$) and critical values/p-values.</li>
+                 <li><strong>Goodness-of-Fit:</strong> Understanding and interpreting $R^2$ ($1 - RSS/TSS$).</li>
+                 <li><strong>Causality vs. Correlation:</strong> Recognizing potential biases like Omitted Variable Bias (OVB) and Sample Selection Bias, and familiarity with techniques like Difference-in-Differences (DiD) for causal inference.</li>
+                 <li><strong>Economic Application:</strong> Applying these econometric tools within specific economic contexts (labour supply, consumer demand) and linking results to economic theory.</li>
+             </ul>
+             <p>The exam tests both technical econometric skills and the ability to interpret results meaningfully in an economic context.</p>
+        </section>
+
+    </div><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- DOM Element References ---
+            const navLinks = document.querySelectorAll('.nav a');
+            const sections = document.querySelectorAll('.section');
+            const navContainer = document.querySelector('.nav-container');
+            const toggleSearchBtn = document.getElementById('toggle-search-btn');
+            const searchWrapper = document.getElementById('search-wrapper');
+            const searchInput = document.getElementById('search-input');
+            const contentToSearch = document.getElementById('searchable-content');
+            const bodyElement = document.body;
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const searchCounter = document.getElementById('search-counter');
+
+            let debounceTimer;
+            const initialNavHeight = navContainer?.offsetHeight || 80;
+            let currentMatchIndex = 0;
+            let totalMatches = 0;
+            let chartInstances = {};
+
+             // --- Navigation Logic ---
+            function updateBodyPadding() {
+                const currentNavHeight = navContainer?.offsetHeight || initialNavHeight;
+                bodyElement.style.paddingTop = `${currentNavHeight + 10}px`;
+            }
+
+            navLinks.forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const currentNavHeight = navContainer?.offsetHeight || initialNavHeight;
+                        // Scroll slightly above the target element
+                        window.scrollTo({ top: targetElement.offsetTop - currentNavHeight - 20, behavior: 'smooth' });
+                        navLinks.forEach(link => link.classList.remove('active'));
+                        this.classList.add('active');
+                    }
+                });
+            });
+
+            function changeNavActiveState() {
+                 let index = sections.length;
+                 const currentNavHeight = navContainer?.offsetHeight || initialNavHeight;
+                 // Adjust trigger point to be slightly higher
+                 const scrollPosition = window.scrollY + currentNavHeight + 30;
+                 while(--index >= 0 && scrollPosition < sections[index].offsetTop) {}
+                 navLinks.forEach((link) => link.classList.remove('active'));
+                 const currentSectionId = sections[index]?.getAttribute('id');
+                 if (currentSectionId) {
+                     const activeLink = document.querySelector(`.nav a[href="#${currentSectionId}"]`);
+                     if (activeLink) { activeLink.classList.add('active'); }
+                 } else {
+                     const firstLink = document.querySelector('.nav a');
+                     if (firstLink && window.scrollY < sections[0].offsetTop - currentNavHeight - 30) { // Only activate first if near top
+                         firstLink.classList.add('active');
+                     }
+                 }
+             }
+
+            // --- Search Functionality ---
+            function removeHighlights() {
+                contentToSearch.querySelectorAll('mark.highlight').forEach(mark => {
+                    const parent = mark.parentNode;
+                    if (parent) {
+                        parent.replaceChild(document.createTextNode(mark.textContent), mark);
+                        parent.normalize();
+                    }
+                });
+                currentMatchIndex = 0;
+                totalMatches = 0;
+                updateMatchCounter();
+                updateNavigationButtons();
+            }
+
+            function updateMatchCounter() {
+                searchCounter.textContent = totalMatches > 0 ? `${currentMatchIndex + 1}/${totalMatches}` : '0/0';
+            }
+
+            function updateNavigationButtons() {
+                prevBtn.disabled = totalMatches === 0 || currentMatchIndex === 0;
+                nextBtn.disabled = totalMatches === 0 || currentMatchIndex >= totalMatches - 1;
+            }
+
+            function navigateToMatch(index) {
+                document.querySelectorAll('mark.highlight.current').forEach(mark => mark.classList.remove('current'));
+                const allMatches = Array.from(document.querySelectorAll('mark.highlight'));
+                if (allMatches.length === 0) return;
+                currentMatchIndex = Math.max(0, Math.min(index, allMatches.length - 1));
+                const currentMatch = allMatches[currentMatchIndex];
+                currentMatch.classList.add('current');
+                const currentNavHeight = navContainer?.offsetHeight || initialNavHeight;
+                const elementTop = currentMatch.getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({ top: elementTop - currentNavHeight - 30, behavior: 'smooth' }); // Adjusted offset
+                updateMatchCounter();
+                updateNavigationButtons();
+            }
+
+             function performSearch() {
+                 const searchTerm = searchInput.value.trim();
+                 removeHighlights();
+                 if (!searchTerm) return;
+
+                 const regex = new RegExp(escapeRegex(searchTerm), 'gi');
+
+                 contentToSearch.querySelectorAll('.section, .question-block, .details-content').forEach(container => { // Include more containers
+                     const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, {
+                         acceptNode: function(node) {
+                             if (node.parentElement.tagName === 'SCRIPT' || node.parentElement.tagName === 'STYLE' || node.parentElement.closest('mjx-container')) {
+                                 return NodeFilter.FILTER_REJECT;
+                             }
+                             // Ensure node isn't inside a non-searchable element if needed
+                             // if (node.parentElement.closest('.non-searchable-class')) { return NodeFilter.FILTER_REJECT; }
+                             return NodeFilter.FILTER_ACCEPT;
+                         }
+                     }, false);
+
+                     let node;
+                     let nodesToReplaceDetails = [];
+
+                     while(node = walker.nextNode()) {
+                         const text = node.nodeValue;
+                         if (!text || !text.trim()) continue;
+
+                         let matchFoundInNode = false;
+                         const fragment = document.createDocumentFragment();
+                         let lastIndex = 0;
+
+                         text.replace(regex, (match, offset) => {
+                             matchFoundInNode = true;
+                             if (offset > lastIndex) { fragment.appendChild(document.createTextNode(text.substring(lastIndex, offset))); }
+                             const mark = document.createElement('mark');
+                             mark.className = 'highlight';
+                             mark.textContent = match;
+                             fragment.appendChild(mark);
+                             lastIndex = offset + match.length;
+                         });
+
+                         if (matchFoundInNode) {
+                             if (lastIndex < text.length) { fragment.appendChild(document.createTextNode(text.substring(lastIndex))); }
+                             nodesToReplaceDetails.push({ original: node, replacementFragment: fragment });
+                         }
+                     }
+
+                     nodesToReplaceDetails.forEach(item => {
+                         try {
+                             item.original.parentNode.replaceChild(item.replacementFragment, item.original);
+                         }
+                         catch (e) { console.error("Error replacing node:", e); }
+                     });
+                 });
+
+                 totalMatches = document.querySelectorAll('mark.highlight').length;
+                 currentMatchIndex = totalMatches > 0 ? 0 : -1;
+                 if (totalMatches > 0) navigateToMatch(0);
+                 else { updateMatchCounter(); updateNavigationButtons(); } // Update even if no matches
+             }
+
+             function escapeRegex(string) { return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+             searchInput.addEventListener('input', () => { clearTimeout(debounceTimer); debounceTimer = setTimeout(performSearch, 300); });
+             prevBtn.addEventListener('click', () => { if (currentMatchIndex > 0) navigateToMatch(currentMatchIndex - 1); });
+             nextBtn.addEventListener('click', () => { if (currentMatchIndex < totalMatches - 1) navigateToMatch(currentMatchIndex + 1); });
+
+             // Keyboard shortcuts
+             searchInput.addEventListener('keydown', (e) => {
+                 if (e.key === 'Enter') { e.preventDefault(); performSearch(); }
+                 else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') { e.preventDefault(); if (currentMatchIndex < totalMatches - 1) navigateToMatch(currentMatchIndex + 1); }
+                 else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') { e.preventDefault(); if (currentMatchIndex > 0) navigateToMatch(currentMatchIndex - 1); }
+             });
+             document.addEventListener('keydown', (e) => {
+                 if (searchWrapper.classList.contains('visible')) {
+                     if (e.key === 'F3' || (e.ctrlKey && e.key === 'g')) { e.preventDefault(); if (e.shiftKey) { if (currentMatchIndex > 0) navigateToMatch(currentMatchIndex - 1); } else { if (currentMatchIndex < totalMatches - 1) navigateToMatch(currentMatchIndex + 1); } }
+                     else if (e.key === 'Escape') { searchWrapper.classList.remove('visible'); searchWrapper.style.maxHeight = '0'; searchInput.value = ''; removeHighlights(); setTimeout(updateBodyPadding, 300); }
+                 } else if ((e.ctrlKey && e.key === 'f') || (e.metaKey && e.key === 'f')) { e.preventDefault(); searchWrapper.classList.add('visible'); searchWrapper.style.maxHeight = searchWrapper.scrollHeight + "px"; searchInput.focus(); setTimeout(updateBodyPadding, 300); }
+             });
+
+             toggleSearchBtn.addEventListener('click', () => {
+                 searchWrapper.classList.toggle('visible');
+                 if (searchWrapper.classList.contains('visible')) { searchWrapper.style.maxHeight = searchWrapper.scrollHeight + "px"; searchInput.focus(); }
+                 else { searchWrapper.style.maxHeight = '0'; searchInput.value = ''; removeHighlights(); }
+                 setTimeout(updateBodyPadding, 300);
+             });
+
+             // --- Responsive Table Labels ---
+             document.querySelectorAll('table:not(.force-layout) tbody tr').forEach(row => { // Exclude force-layout tables
+                 const cells = row.querySelectorAll('td');
+                 const headers = Array.from(row.closest('table').querySelectorAll('thead th')).map(th => th.textContent);
+                 cells.forEach((cell, index) => { if(headers[index]) cell.setAttribute('data-label', headers[index]); });
+             });
+
+             // --- Toggle Functionality (using details/summary) ---
+             // No specific JS needed for basic toggle, but potentially for enhancements like smooth animation or saving state.
+
+            // --- Chart Initialization ---
+             function initializeCharts() {
+                 const chartColors = { pinkBg: 'rgba(255, 99, 132, 0.7)', blueBg: 'rgba(54, 162, 235, 0.7)', yellowBg: 'rgba(255, 206, 86, 0.7)', tealBg: 'rgba(75, 192, 192, 0.7)', purpleBg: 'rgba(153, 102, 255, 0.7)', pinkBorder: 'rgba(255, 99, 132, 1)', blueBorder: 'rgba(54, 162, 235, 1)', yellowBorder: 'rgba(255, 206, 86, 1)', tealBorder: 'rgba(75, 192, 192, 1)', purpleBorder: 'rgba(153, 102, 255, 1)' };
+                 const defaultChartOptions = { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: true, position: 'top', labels: { padding: 15, font: { size: 13 } } }, tooltip: { backgroundColor: 'rgba(0, 0, 0, 0.8)', titleFont: { size: 14 }, bodyFont: { size: 12 }, padding: 10, callbacks: { label: function(context) { let label = context.label || ''; if (label) { label += ': '; } if (context.parsed !== null) { label += context.raw + '%'; } return label; } } } } };
+
+                 Object.values(chartInstances).forEach(chart => chart.destroy());
+                 chartInstances = {};
+
+                 // Mark Distribution Chart (Pie)
+                 const markCtx = document.getElementById('markDistributionChart');
+                 if (markCtx) {
+                     try {
+                         chartInstances.markDist = new Chart(markCtx.getContext('2d'), { type: 'pie', data: { labels: ['Part A', 'Part B'], datasets: [{ data: [40, 60], backgroundColor: [ chartColors.pinkBg, chartColors.blueBg ], borderColor: [ chartColors.pinkBorder, chartColors.blueBorder ], borderWidth: 1.5 }] }, options: { ...defaultChartOptions, plugins: { ...defaultChartOptions.plugins, tooltip: { callbacks: { label: function(context) { return `${context.label}: ${context.raw}%`; } } } } } });
+                     } catch (e) { console.error("Error creating Mark Distribution Chart:", e); }
+                 }
+
+                 // Topic Distribution Chart (Bar)
+                 const topicCtx = document.getElementById('topicDistributionChart');
+                 if (topicCtx) {
+                     try {
+                         chartInstances.topicDist = new Chart(topicCtx.getContext('2d'), { type: 'bar', data: { labels: ['OLS Regression (A)', 'Demand System (B)', 'Diff-in-Diff (B)', 'Labour Supply (B)'], datasets: [{ label: 'Potential Max Marks (%)', data: [40, 30, 30, 30], backgroundColor: [ chartColors.pinkBg, chartColors.blueBg, chartColors.yellowBg, chartColors.tealBg ], borderColor: [ chartColors.pinkBorder, chartColors.blueBorder, chartColors.yellowBorder, chartColors.tealBorder ], borderWidth: 1, borderRadius: 5 }] }, options: { ...defaultChartOptions, indexAxis: 'x', scales: { y: { beginAtZero: true, max: 45, title: { display: true, text: 'Potential Max Marks (%)', font: { size: 13 } } }, x: { title: { display: true, text: 'Topic Areas (Part)', font: { size: 13 } } } }, plugins: { ...defaultChartOptions.plugins, tooltip: { callbacks: { label: function(context) { return `${context.dataset.label}: ${context.raw}%`; } } } } } });
+                     } catch (e) { console.error("Error creating Topic Distribution Chart:", e); }
+                 }
+             }
+
+             // --- Initial Setup ---
+             updateBodyPadding();
+             window.addEventListener('resize', updateBodyPadding);
+             changeNavActiveState(); // Initial check
+             window.addEventListener('scroll', changeNavActiveState);
+             // Initialize charts after MathJax is ready
+              if (typeof MathJax !== 'undefined' && MathJax.startup) {
+                 MathJax.startup.promise.then(() => {
+                     console.log('MathJax ready, initializing charts...');
+                     initializeCharts();
+                 }).catch(err => console.error('MathJax startup error:', err));
+             } else {
+                 console.warn('MathJax not found immediately, delaying chart init.');
+                 setTimeout(initializeCharts, 1000); // Longer delay as fallback
+             }
+
+         });
+     </script>
+
+ </body>
+ </html>
